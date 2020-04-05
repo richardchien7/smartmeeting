@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div><%- include navbar %></div>
+    <h1><%= title %></h1>
+    <p>Welcome too <%= title %></p>
+
+    
+    <form id="form" method="post">
+        
+        <input type="submit" value="import">
+    </form>
+    <button id="upload">upload</button>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#upload').click(function(){
+                // 按鈕按下時發送一個 POST Request 到 http://hack.com/hack.php
+                $.ajax({
+                    url: 'http://localhost:8983/solr/zchg/dataimport?command=full-import&clean=true',
+                    dataType:'jsonp',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data:""
+                }).done(function() {
+                    console.log('Done!');
+                });
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

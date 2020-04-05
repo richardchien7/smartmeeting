@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" onchange="parseWordDocxFile(this)">
+    <script>
+  function parseWordDocxFile(inputElement) {
+      console.log("1");
+    var files = inputElement.files || [];
+    if (!files.length) return;
+    var file = files[0];
+
+    console.log("2");
+    var reader = new FileReader();
+    reader.onloadend = function(event) {
+      console.log("3");
+      var arrayBuffer = reader.result;
+      // debugger
+
+      mammoth.convertToHtml({arrayBuffer: arrayBuffer}).then(function (resultObject) {
+        console.log("4");
+        result1.innerHTML = resultObject.value
+        console.log(resultObject.value)
+      })
+      console.timeEnd();
+      reader.readAsArrayBuffer(file);
+  }
+}
+      </script>
+      <script src="https://cdn.bootcss.com/mammoth/1.4.8/mammoth.browser.js"></script>
+      <!-- <script src="demo_test.js"></script> -->
+
+</body>
+</html>
